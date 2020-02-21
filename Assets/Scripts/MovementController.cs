@@ -32,15 +32,15 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame, used to update game behaviors
     private void Update()
     {
-        
+        //Update() method that is called once per frame
     }
 
-    // 5
+    // FixedUpdate() is called at fixed intervals by the Unity Engine, not once per frame as the update() method.
     void FixedUpdate()
     {
         // 6
-        movement.x = Input.GetAxisRaw(“Horizontal”);
-        movement.y = Input.GetAxisRaw(“Vertical”);
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
         // 7
         movement.Normalize();
         // 8
