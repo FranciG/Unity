@@ -107,8 +107,12 @@
      <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />
      <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
      <Compile Include="Assets\mover.cs" />
-     <Compile Include="Assets\Scripts\MovementController.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\Character.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\Consumable.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\MovementController.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\Player.cs" />
      <Compile Include="Assets\Scripts\RoundCameraPos.cs" />
+     <Compile Include="Assets\Scripts\Scriptable Objects\Item.cs" />
      <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/YO/platforms/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
