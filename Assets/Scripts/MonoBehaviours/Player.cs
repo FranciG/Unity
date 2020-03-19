@@ -18,9 +18,31 @@ void OnTriggerEnter2D(Collider2D collision)
     {
 // To ensure that we’ve retrieved the item, print out the objectName property
         print("it: " + hitObject.objectName);
+
+// This allows us script specific behaviors when colliding with each ItemType
+                switch (hitObject.itemType)
+                {
+// In the case where the hitObject is of type COIN, don’t do anything just yet
+                    case Item.ItemType.COIN:
+                        break;
+// call the method AdjustHitPoints(int amount) . This method takes a parameter of type int, which we’ll get from the hitObject property quantity.
+                    case Item.ItemType.HEALTH:
+                        AdjustHitPoints(hitObject.quantity);
+                        break;
+                    default:
+                        break;
+                }
         collision.gameObject.SetActive(false);
     }
     }
 }
+
+// This method will adjust the player’s hit-points by the amount in the parameter
+    public void AdjustHitPoints(int amount)
+    {
+// Add the amount parameter to the existing hit-point count, and then assign the result to hitPoints.
+        hitPoints = hitPoints + amount;
+        print("Adjusted hitpoints by: " + amount + ". New value: " + hitPoints);
+    }
 
 }
