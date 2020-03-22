@@ -1,7 +1,25 @@
 ﻿  using UnityEngine;
   //  inherit from the Character class to gain properties like hitPoints.
+
+
   public class Player : Character
   {
+// we instantiate a copy of the HealthBar prefab
+public HealthBar healthBarPrefab;
+// store a reference to the instantiated HealthBar
+HealthBar healthBar;
+
+public void Start()
+	{
+    
+// The Start() method will only be called once—when the script is enabled. It assigns the current hitPoints.value
+hitPoints.value = startingHitPoints;
+// Instantiate a copy of the Health Bar prefab and store a reference to it in memory
+healthBar = Instantiate(healthBarPrefab);
+healthBar.character = this;
+	}
+
+
     // OnTriggerEnter2D() is called whenever this object overlaps with a trigger collider
 void OnTriggerEnter2D(Collider2D collision)
 {
@@ -16,33 +34,45 @@ void OnTriggerEnter2D(Collider2D collision)
 // Check to see if the hitObject is null. If the hitObject is not null, it has been retrieved the hitObject
     if (hitObject != null)
     {
-// To ensure that we’ve retrieved the item, print out the objectName property
-        print("it: " + hitObject.objectName);
-
-// This allows us script specific behaviors when colliding with each ItemType
-                switch (hitObject.itemType)
-                {
-// In the case where the hitObject is of type COIN, don’t do anything just yet
-                    case Item.ItemType.COIN:
-                        break;
-// call the method AdjustHitPoints(int amount) . This method takes a parameter of type int, which we’ll get from the hitObject property quantity.
-                    case Item.ItemType.HEALTH:
-                        AdjustHitPoints(hitObject.quantity);
-                        break;
-                    default:
-                        break;
-                }
-        collision.gameObject.SetActive(false);
-    }
+// value will be set to indicate that the object in the collision should disappear.
+            bool shouldDisappear = false;
+            switch (hitObject.itemType)
+            {
+                case Item.ItemType.COIN:
+// coins the player collides with should disappear by default
+                    shouldDisappear = true;
+                    break;
+                case Item.ItemType.HEALTH:
+// The AdjustHitPoints() method will return true if the hit-points were adjusted, and false if they were not.
+                    shouldDisappear = AdjustHitPoints(hitObject.quantity);
+                    break;
+                default:
+                    break;
+            }
+// If AdjustHitPoints() returned true, then the prefab object should disappear.
+            if (shouldDisappear)
+            {
+                collision.gameObject.SetActive(false);
+            }
+        }
     }
 }
 
-// This method will adjust the player’s hit-points by the amount in the parameter
-    public void AdjustHitPoints(int amount)
+// The AdjustHitPoints() method will return type: bool, indicating if hitPoints was successfully adjusted.
+public bool AdjustHitPoints(int amount)
+{
+// Check if the current hit-points are less than the maximum allowed hit-points.
+    if (hitPoints.value < maxHitPoints)
     {
-// Add the amount parameter to the existing hit-point count, and then assign the result to hitPoints.
-        hitPoints = hitPoints + amount;
-        print("Adjusted hitpoints by: " + amount + ". New value: " + hitPoints);
+// Adjust the player’s current hitPoints by amount
+        hitPoints.value = hitPoints.value + amount;
+// Print out to help in debugging
+        print("Adjusted HP by: " + amount + ". New value: " + hitPoints.value);
+// Return true to indicate that the hit-points were adjusted and false if not.
+        return true;
     }
+
+    return false;
+}
 
 }
