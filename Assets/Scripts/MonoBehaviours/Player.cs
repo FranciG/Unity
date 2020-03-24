@@ -4,6 +4,10 @@
 
   public class Player : Character
   {
+//Store a reference to the Inventory prefab
+public Inventory inventoryPrefab;
+//Used to store a reference to the Inventory once it’s instantiated
+Inventory inventory;
 // we instantiate a copy of the HealthBar prefab
 public HealthBar healthBarPrefab;
 // store a reference to the instantiated HealthBar
@@ -11,9 +15,11 @@ HealthBar healthBar;
 
 public void Start()
 	{
-    
+ 
 // The Start() method will only be called once—when the script is enabled. It assigns the current hitPoints.value
 hitPoints.value = startingHitPoints;
+//This line will store a reference to the prefab in the inventory variable   
+inventory = Instantiate(inventoryPrefab);
 // Instantiate a copy of the Health Bar prefab and store a reference to it in memory
 healthBar = Instantiate(healthBarPrefab);
 healthBar.character = this;
@@ -39,8 +45,11 @@ void OnTriggerEnter2D(Collider2D collision)
             switch (hitObject.itemType)
             {
                 case Item.ItemType.COIN:
+// Call the AddItem() method on the local inventory instance and pass it hitObject as a parameter
+        shouldDisappear = inventory.AddItem(hitObject);
+              
 // coins the player collides with should disappear by default
-                    shouldDisappear = true;
+                   // shouldDisappear = true;
                     break;
                 case Item.ItemType.HEALTH:
 // The AdjustHitPoints() method will return true if the hit-points were adjusted, and false if they were not.
