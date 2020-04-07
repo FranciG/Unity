@@ -18,8 +18,8 @@ public void Start()
  
 // The Start() method will only be called once—when the script is enabled. It assigns the current hitPoints.value
 hitPoints.value = startingHitPoints;
-//This line will store a reference to the prefab in the inventory variable   
-inventory = Instantiate(inventoryPrefab);
+//This line will store a reference to the prefab in the inventory variable. I decided to o not use an inventory   
+//inventory = Instantiate(inventoryPrefab);
 // Instantiate a copy of the Health Bar prefab and store a reference to it in memory
 healthBar = Instantiate(healthBarPrefab);
 healthBar.character = this;
