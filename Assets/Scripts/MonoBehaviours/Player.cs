@@ -13,6 +13,8 @@ public HealthBar healthBarPrefab;
 // store a reference to the instantiated HealthBar
 HealthBar healthBar;
 
+public HitPoints hitPoints;
+
 public void Start()
 	{
  
