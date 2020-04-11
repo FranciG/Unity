@@ -1,75 +1,40 @@
 ﻿  using UnityEngine;
   //  inherit from the Character class to gain properties like hitPoints.
-
+using System.Collections;
 
   public class Player : Character
   {
 //Store a reference to the Inventory prefab
-public Inventory inventoryPrefab;
+//public Inventory inventoryPrefab;
 //Used to store a reference to the Inventory once it’s instantiated
-Inventory inventory;
+//Inventory inventory;
 // we instantiate a copy of the HealthBar prefab
 public HealthBar healthBarPrefab;
 // store a reference to the instantiated HealthBar
 HealthBar healthBar;
 
 public HitPoints hitPoints;
-
+private void OnEnable()
+    {
+        ResetCharacter();
+    }
+/*
 public void Start()
 	{
  
 // The Start() method will only be called once—when the script is enabled. It assigns the current hitPoints.value
 hitPoints.value = startingHitPoints;
-//This line will store a reference to the prefab in the inventory variable. I decided to o not use an inventory   
-//inventory = Instantiate(inventoryPrefab);
-// Instantiate a copy of the Health Bar prefab and store a reference to it in memory
-healthBar = Instantiate(healthBarPrefab);
-healthBar.character = this;
-	}
 
+	}
+*/
 
     // OnTriggerEnter2D() is called whenever this object overlaps with a trigger collider
 void OnTriggerEnter2D(Collider2D collision)
 {
 
-   /* 
+   
 //Examine the tag of the collided gameObject. If that tag is “CanBePickedUp” then continue execution inside the if-statement.
-    if (collision.gameObject.CompareTag("CanBePickedUp"))
-    {
-// grab a reference to the gameObject attached to the collision
-//every collision will have a GameObject that it collided with attached to the collision
-//It applies to any type of GameObject with the tag, “CanBePickedUp”
-//We call GetComponent() on the gameObject and pass in the Script name, “Consumable”
-  Item hitObject = collision.gameObject.GetComponent<Consumable>().item;
-// Check to see if the hitObject is null. If the hitObject is not null, it has been retrieved the hitObject
-    if (hitObject != null)
-    {
-// value will be set to indicate that the object in the collision should disappear.
-            bool shouldDisappear = false;
-            switch (hitObject.itemType)
-            {
-                case Item.ItemType.COIN:
-// Call the AddItem() method on the local inventory instance and pass it hitObject as a parameter
-        shouldDisappear = inventory.AddItem(hitObject);
-              
-// coins the player collides with should disappear by default
-                   // shouldDisappear = true;
-                    break;
-                case Item.ItemType.HEALTH:
-// The AdjustHitPoints() method will return true if the hit-points were adjusted, and false if they were not.
-                    shouldDisappear = AdjustHitPoints(hitObject.quantity);
-                    break;
-                default:
-                    break;
-            }
-// If AdjustHitPoints() returned true, then the prefab object should disappear.
-            if (shouldDisappear)
-            {
-                collision.gameObject.SetActive(false);
-            }
-        }
-    }
-*/
+
 if (collision.gameObject.CompareTag("CanBePickedUp"))
         {
             Item hitObject = collision.gameObject.GetComponent<Consumable>().item;
@@ -81,7 +46,7 @@ if (collision.gameObject.CompareTag("CanBePickedUp"))
                 switch (hitObject.itemType)
                 {
                     case Item.ItemType.COIN:
-                        shouldDisappear = inventory.AddItem(hitObject);
+                       // shouldDisappear = inventory.AddItem(hitObject);
                         break;
                     case Item.ItemType.HEALTH:
                         shouldDisappear = AdjustHitPoints(hitObject.quantity);
@@ -115,5 +80,48 @@ public bool AdjustHitPoints(int amount)
 
     return false;
 }
+
+
+// Implement the DamageCharacter() method as done on the enemy class
+public override IEnumerator DamageCharacter(int damage, float interval)
+{
+    while (true)
+    {
+        hitPoints.value = hitPoints.value - damage;
+        if (hitPoints.value <= float.Epsilon)
+        {
+            KillCharacter();
+            break;
+        }
+        if (interval > float.Epsilon)
+        {
+            yield return new WaitForSeconds(interval);
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+public override void KillCharacter()
+{
+//  base keyword refeers to the parent or “base” class that the current class inherits from (character)
+    base.KillCharacter();
+//Destroy healthbar
+    Destroy(healthBar.gameObject);
+    //Destroy(inventory.gameObject);
+}
+
+public override void ResetCharacter()
+{
+// Instantiate a copy of the Health Bar prefab and store a reference to it in memory
+    //inventory = Instantiate(inventoryPrefab);
+    healthBar = Instantiate(healthBarPrefab);
+    healthBar.character = this;
+// Set the hit-points of the Player to the starting hit-points value
+    hitPoints.value = startingHitPoints;
+}
+
 
 }

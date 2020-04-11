@@ -1,5 +1,8 @@
 ﻿
 using UnityEngine;
+
+// IEnumerator is part of the System.Collections namespace that is why import it is needed
+using System.Collections;
 /* generic Character class with properties common to all 
 character types. */
 // We’ll use the Abstract modifier in C# to indicate that this class cannot be instantiated and must be inherited by a subclass.
@@ -17,5 +20,12 @@ public virtual void KillCharacter()
     
      Destroy(gameObject);
      }
+
+// Set the character back to its original starting state, so it can be used again.
+
+public abstract void ResetCharacter();
+// Called by other Characters to damage the current character. Takes an amount to damage the character and a time interval
+public abstract IEnumerator DamageCharacter(int damage, float interval);
+
 
 }
