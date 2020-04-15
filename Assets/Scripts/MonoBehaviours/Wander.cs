@@ -122,6 +122,48 @@ public IEnumerator Move(Rigidbody2D rigidBodyToMove, float speed)
 }
 
 
+void OnTriggerEnter2D(Collider2D collision)
+{
+// Check the tag on the object in the collision and that followPlayer is currently true
+    if (collision.gameObject.CompareTag("Player") && followPlayer)
+    {
+// change the currentSpeed to the pursuitSpeed
+        currentSpeed = pursuitSpeed;
+// The Move() coroutine will check if targetTransform is not null, and then use it as the new value of endPosition
+        targetTransform = collision.gameObject.transform;
+// If the Enemy is currently moving, the moveCoroutine will not be null. It needs to be stopped before started again.
+        if (moveCoroutine != null)
+        {
+            StopCoroutine(moveCoroutine);
+        }
+// Move() will move the Enemy toward the player
+        moveCoroutine = StartCoroutine(Move(rb2d, currentSpeed));
+    }
+}
+
+void OnTriggerExit2D(Collider2D collision)
+{
+// Check the tag to see if the Player is leaving the collider
+    if (collision.gameObject.CompareTag("Player"))
+    {
+// Set isWalking to false, to change the animation to idle
+        animator.SetBool("isWalking", false);
+// Set the currentSpeed to the wanderSpeed
+        currentSpeed = wanderSpeed;
+// stop the moveCoroutine to stop the pursue
+        if (moveCoroutine != null)
+        {
+            StopCoroutine(moveCoroutine);
+        }
+
+        targetTransform = null;
+    }
+}
+
+
+
+
+
 
 
 
