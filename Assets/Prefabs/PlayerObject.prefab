@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2470113174333945897}
   - component: {fileID: 2470113174333945896}
   - component: {fileID: 2470113174333945903}
+  - component: {fileID: 114774919839224370}
   - component: {fileID: 2470113174333945902}
   - component: {fileID: 2470113174333945901}
   m_Layer: 8
@@ -150,6 +151,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &114774919839224370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470113174333945900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c808769b72452242a7b7a9482af8194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2470113174333945902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,12 +175,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9aaeb771fb8b84db7f3faf59b56e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: {fileID: 11400000, guid: 086ca67545686504bb6fa6ec7ee710bc, type: 2}
   maxHitPoints: 10
   startingHitPoints: 6
-  inventoryPrefab: {fileID: 0}
   healthBarPrefab: {fileID: 114988882365434606, guid: 336fa2e7a378ab34da9c81ca66f0abad,
     type: 3}
+  hitPoints: {fileID: 11400000, guid: 086ca67545686504bb6fa6ec7ee710bc, type: 2}
 --- !u!114 &2470113174333945901
 MonoBehaviour:
   m_ObjectHideFlags: 0
