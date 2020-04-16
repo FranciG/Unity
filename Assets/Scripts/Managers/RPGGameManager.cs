@@ -51,5 +51,13 @@ public void SpawnPlayer()
 
 
 }
+//Quit when pressing esc key.
+void Update()
+{
+    if (Input.GetKey("escape"))
+    {
+        Application.Quit();
+    }
+}
 
 }
