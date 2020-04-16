@@ -115,10 +115,8 @@
      <Compile Include="Assets\Scripts\MonoBehaviours\Consumable.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Enemy.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\HealthBar.cs" />
-     <Compile Include="Assets\Scripts\MonoBehaviours\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\MovementController.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Player.cs" />
-     <Compile Include="Assets\Scripts\MonoBehaviours\Slot.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\SpawnPoint.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Wander.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Weapon.cs" />

@@ -4,10 +4,7 @@ using System.Collections;
 
   public class Player : Character
   {
-//Store a reference to the Inventory prefab
-//public Inventory inventoryPrefab;
-//Used to store a reference to the Inventory once it’s instantiated
-//Inventory inventory;
+
 // we instantiate a copy of the HealthBar prefab
 public HealthBar healthBarPrefab;
 // store a reference to the instantiated HealthBar
@@ -18,15 +15,7 @@ private void OnEnable()
     {
         ResetCharacter();
     }
-/*
-public void Start()
-	{
- 
-// The Start() method will only be called once—when the script is enabled. It assigns the current hitPoints.value
-hitPoints.value = startingHitPoints;
 
-	}
-*/
 
     // OnTriggerEnter2D() is called whenever this object overlaps with a trigger collider
 void OnTriggerEnter2D(Collider2D collision)
@@ -45,9 +34,8 @@ if (collision.gameObject.CompareTag("CanBePickedUp"))
 
                 switch (hitObject.itemType)
                 {
-                    case Item.ItemType.COIN:
-                       // shouldDisappear = inventory.AddItem(hitObject);
-                        break;
+                    //Different cases can be used for different object actions
+                    //There is currently only one collectible item type
                     case Item.ItemType.HEALTH:
                         shouldDisappear = AdjustHitPoints(hitObject.quantity);
                         break;
@@ -89,7 +77,7 @@ public override IEnumerator DamageCharacter(int damage, float interval)
     {
         //Start the FlickerCharacter() Coroutine from the character class when damaged
     StartCoroutine(FlickerCharacter());   
-    
+
         hitPoints.value = hitPoints.value - damage;
         if (hitPoints.value <= float.Epsilon)
         {
