@@ -87,6 +87,9 @@ public override IEnumerator DamageCharacter(int damage, float interval)
 {
     while (true)
     {
+        //Start the FlickerCharacter() Coroutine from the character class when damaged
+    StartCoroutine(FlickerCharacter());   
+    
         hitPoints.value = hitPoints.value - damage;
         if (hitPoints.value <= float.Epsilon)
         {

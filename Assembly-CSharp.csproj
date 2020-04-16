@@ -110,6 +110,7 @@
      <Compile Include="Assets\Scripts\Managers\RPGCameraManager.cs" />
      <Compile Include="Assets\Scripts\Managers\RPGGameManager.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Ammo.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\Arc.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Character.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Consumable.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Enemy.cs" />

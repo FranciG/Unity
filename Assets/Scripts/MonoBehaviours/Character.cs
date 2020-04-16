@@ -27,5 +27,15 @@ public abstract void ResetCharacter();
 // Called by other Characters to damage the current character. Takes an amount to damage the character and a time interval
 public abstract IEnumerator DamageCharacter(int damage, float interval);
 
+//Flcker when damaged
+public virtual IEnumerator FlickerCharacter()
+{
+// tint the sprite red
+    GetComponent<SpriteRenderer>().color = Color.red;
+// Yield execution for 0.1 seconds
+    yield return new WaitForSeconds(0.1f);
+// Change the SpriteRenderer tint back to the default color
+    GetComponent<SpriteRenderer>().color = Color.white;
+}
 
 }

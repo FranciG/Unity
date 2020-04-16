@@ -163,6 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c808769b72452242a7b7a9482af8194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoPrefab: {fileID: 6009810549764864517, guid: a96b597c485159545b0ba3c57c45db3d,
+    type: 3}
+  poolSize: 14
+  weaponVelocity: 2
 --- !u!114 &2470113174333945902
 MonoBehaviour:
   m_ObjectHideFlags: 0

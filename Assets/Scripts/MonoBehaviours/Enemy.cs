@@ -17,6 +17,8 @@ public override IEnumerator DamageCharacter(int damage, float interval)
 // loop will continue inflicting damage until the character dies, or if the interval = 0, it will break and return.
     while (true)
     {
+//Start the FlickerCharacter() Coroutine from the character class when damaged
+    StartCoroutine(FlickerCharacter());    
 // Subtract the amount of damage inflicted from the current hitPoints and set the result to hitPoints.
 
         hitPoints = hitPoints - damage;
